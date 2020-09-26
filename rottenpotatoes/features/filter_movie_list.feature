@@ -28,6 +28,20 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step to "submit" the search form on the homepage
   # enter step(s) to ensure that PG and R movies are visible
   # enter step(s) to ensure that other movies are not visible
+ When I check the following ratings: PG,R
+  And I uncheck the following ratings: G,PG-13,NC-17
+  And I press "Refresh"
+  Then I should see all movies with ratings: PG,R
+  And I should not see movies with ratings: G,PG-13,NC-17
 
 Scenario: all ratings selected
-  # see assignment
+  When I check the following ratings: G,PG,PG-13,NC-17,R
+  Then I should see all the movies
+  
+Scenario: sort movies alphabetically
+  When I follow "Movie Title"
+  Then I should see "2001: A Space Odyssey" before "Aladdin"
+  
+Scenario: sort movies in increasing order of release date
+  When I follow "Release Date"
+  Then I should see "1968-04-06" before "1981-06-13"
