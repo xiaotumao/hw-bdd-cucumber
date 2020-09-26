@@ -43,3 +43,7 @@ Then /I should see all the movies/ do
   number_of_movies = Movie.count
   expect(page).to have_css('#movies tbody tr', count: number_of_movies)
 end
+
+Then(/^(\d+) seed movies should exist$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
